@@ -1,38 +1,53 @@
 import streamlit as st
 
-st.set_page_config(page_title="Satyamev AI", page_icon="🛡️", layout="centered")
+# Page setup
+st.set_page_config(page_title="Satyamev AI - Anti-Scam", page_icon="🛡️")
 
-# Design & Header
+# Custom CSS for Professional Look
+st.markdown("""
+    <style>
+    .main { background-color: #f0f2f6; }
+    .stButton>button { width: 100%; border-radius: 20px; height: 3em; background-color: #ff4b4b; color: white; }
+    </style>
+    """, unsafe_allow_html=True)
+
 st.title("🛡️ Satyamev AI: Anti-Scam Guard")
-st.subheader("India ka sabse asaan Scam Detection tool")
+st.write("India ka apna AI jo aapko digital thagi se bachayega.")
 st.write("---")
 
-# User Input Section
-user_input = st.text_area("Scammer ka message ya call ki baatein yahan likhein:", height=150, placeholder="Jaise: Aapka bank account block ho gaya hai...")
+# Input Box
+user_input = st.text_area("Scammer ka message ya call ki baatein yahan paste karein:", 
+                         placeholder="Example: Aapka KYC expire ho gaya hai, turant update karein...",
+                         height=150)
 
-if st.button("🚨 AI SCAN KARO"):
+if st.button("🚨 SCAN KARO"):
     if user_input:
         text = user_input.lower()
         
-        # Power Logic
-        danger_words = ["paisa", "otp", "police", "jail", "block", "lottery", "prize", "khata", "arrest", "kyc", "cbi"]
-        found = [word for word in danger_words if word in text]
+        # Advanced Scam Keywords
+        scam_keywords = [
+            "otp", "paisa", "account block", "lottery", "prize", "gift", "cbi", "police", 
+            "arrest", "kyc", "bank", "customer care", "electricity", "bill", "link", "click"
+        ]
+        
+        found = [word for word in scam_keywords if word in text]
         
         if found:
-            st.error(f"### 🛑 MAHA-SCAM DETECTED!")
-            st.write(f"Humne ye khatarnak shabd pakde hain: **{', '.join(found)}**")
-            st.warning("👉 **ACTION:** Phone kaat do aur koi bhi link mat dabao!")
+            st.error(f"### 🛑 ALERT: YE EK SCAM HAI!")
+            st.write(f"Humne ye khatarnak words pakde hain: **{', '.join(found)}**")
+            st.warning("**Foran ye karein:**\n1. Kisi bhi link par click mat karein.\n2. Koi bhi OTP share na karein.\n3. Is number ko block kar dein.")
             
-            # Emergency Help
             st.write("---")
-            st.info("📢 **Kahan Shikayat Karein?**\n\n* **Helpline:** Dial **1930** (Cyber Crime Cell)\n* **Website:** [cybercrime.gov.in](https://cybercrime.gov.in)")
+            st.subheader("📢 Turant Sahayata Ke Liye:")
+            st.info("Cyber Crime Helpline: **Dial 1930**")
+            st.markdown("[Official Complaint Website](https://cybercrime.gov.in)")
         else:
-            st.success("✅ **SAFE:** Abhi tak kuch bhi suspicious nahi mila. Par savdhaan rahein!")
+            st.success("✅ **SAFE LAG RAHA HAI:** Humein koi scam keywords nahi mile. Phir bhi savdhaan rahein!")
     else:
-        st.warning("Bhai, pehle kuch likho toh sahi!")
+        st.warning("Bhai, pehle kuch message toh likho!")
 
-# Sidebar for Trust
-st.sidebar.title("Mission: Scam-Free India")
-st.sidebar.write("Ye AI aapko digital dhokhadhari se bachane ke liye banaya gaya hai.")
-st.sidebar.markdown("---")
-st.sidebar.write("DEVELOPED BY: **NEERAJ SINGH**")
+# Sidebar Info
+st.sidebar.title("About Satyamev AI")
+st.sidebar.info("Ye tool aapki safety ke liye banaya gaya hai. Har mahine 10,000+ log digital scam ka shikaar hote hain. Hum ise milkar rokenge!")
+st.sidebar.write("---")
+st.sidebar.write("Developed with ❤️ by **Neeraj Singh**")

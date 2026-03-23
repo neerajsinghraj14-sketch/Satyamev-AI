@@ -1,54 +1,33 @@
 import streamlit as st
+import google.generativeai as genai
 
-# Page Branding
-st.set_page_config(page_title="Satyamev AI - Futuristic Shield", page_icon="🛡️", layout="wide")
+# Setup Gemini AI
+genai.configure(api_key="YOUR_GEMINI_API_KEY") AIzaSyBnaU5GKOAGN3hhZFc0ZDMfvte0hcS5XKE
+model = genai.GenerativeModel('gemini-1.5-flash')
 
-st.title("🛡️ Satyamev AI: Next-Gen Anti-Scam Engine")
-st.markdown("### *Self-Learning Neural Protection*")
-st.write("---")
+st.set_page_config(page_title="Satyamev AI - Pro", layout="wide")
 
-# Dynamic Ticker for New Scams
-st.warning("🔥 **CURRENT THREATS:** Digital Arrest Fraud, Electricity Bill SMS, & WhatsApp Job Scams. Never share your screen!")
+st.title("🛡️ Satyamev AI: Brain-Powered Protection")
+st.write("Ab ye AI sirf words nahi, scammers ki 'Chalaaki' pakadta hai.")
 
-# Scanner Layout
-col1, col2 = st.columns([2, 1])
+user_input = st.text_area("Scammer ka message ya script yahan likhein:", height=200)
 
-with col1:
-    user_input = st.text_area("Scammer ka message ya call script yahan likhein:", height=250, placeholder="Example: Sir, main Delhi Police se bol raha hoon...")
-    
-    if st.button("🚀 DEEP SCAN (AI ANALYZE)"):
-        if user_input:
-            text = user_input.lower()
-            
-            # Risk Analysis Logic (Intent Based)
-            high_risk = ["digital arrest", "video call", "fedex", "illegal parcel", "supreme court", "cbi", "drug", "jail", "terrorist"]
-            med_risk = ["otp", "paisa", "kyc", "bank", "block", "lottery", "gift", "link", "click", "electricity"]
-            
-            # 1. High Risk Check (Threats/Fear)
-            if any(word in text for word in high_risk):
-                st.error("🚨 **CRITICAL ALERT: MAHA-SCAM DETECTED!**")
-                st.subheader("Analysis: Ye 'Fear-Based' (Darr wala) scam lag raha hai.")
-                st.info("📢 **Action Plan:** Phone kaat dein. Ye log asli police nahi hain. 1930 par call karein.")
-            
-            # 2. Medium Risk Check (Greed/Banking)
-            elif any(word in text for word in med_risk):
-                st.warning("⚠️ **POTENTIAL FRAUD DETECTED**")
-                st.write("Is message mein thagi wale keywords mile hain. Bank kabhi bhi call par details nahi maangta.")
-            
-            # 3. Uncertain/New Pattern
-            else:
-                st.info("🧐 **NEUTRAL ANALYSIS:** Humein koi purana pattern nahi mila.")
-                st.write("**Par Savdhaan!** Agar wo paisa maang rahe hain ya darr dikha rahe hain, toh ye 100% scam hai.")
-        else:
-            st.warning("Bhai, pehle message toh dalo!")
+if st.button("🚀 DEEP SCAN WITH AI"):
+    if user_input:
+        with st.spinner('AI dimaag laga raha hai...'):
+            try:
+                # AI ko instruction dena
+                prompt = f"Analyze this message for a scam. Tell me in Hindi/English if it's a scam and why. Message: {user_input}"
+                response = model.generate_content(prompt)
+                
+                st.subheader("AI Analysis Result:")
+                st.write(response.text)
+                
+                st.divider()
+                st.warning("🚨 **Satyamev AI Tip:** Agar AI 'Safe' kahe phir bhi kisi ko paisa mat bhejna.")
+            except Exception as e:
+                st.error("API Key shayad sahi nahi hai, ek baar check karo.")
+    else:
+        st.warning("Bhai, pehle message toh dalo!")
 
-with col2:
-    st.subheader("🌐 Global Scam Feed")
-    st.write("Humara database har ghante update hota hai.")
-    st.divider()
-    st.button("🚩 Report a New Scam Method")
-    st.success("Verified Secure: No Data Stored")
-
-# Reputation Protection Disclaimer
-st.write("---")
-st.caption("🚨 **Disclaimer:** Satyamev AI aapki madad ke liye hai. Kabhi bhi apni personal info kisi anjaan ko na dein. Developing by Neeraj Singh.")
+st.sidebar.write("Developed by: **Neeraj Singh**")

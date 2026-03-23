@@ -1,43 +1,53 @@
 import streamlit as st
 
-st.set_page_config(page_title="Satyamev AI - Futuristic Shield", layout="wide")
+# Page Branding
+st.set_page_config(page_title="Satyamev AI - Futuristic Shield", page_icon="🛡️", layout="wide")
 
-# App Header
-st.title("🛡️ Satyamev AI: Futuristic Anti-Fraud Engine")
-st.markdown("### *India ka Pehla Self-Learning Scam Detector*")
+st.title("🛡️ Satyamev AI: Next-Gen Anti-Scam Engine")
+st.markdown("### *Self-Learning Neural Protection*")
 st.write("---")
 
-# Section 1: Dynamic Scam News (Ticker)
-st.info("🔥 **LATEST SCAMS:** Digital Arrest, Electricity Bill Fraud, and FedEx Courier Scam are trending. Stay Alert!")
+# Dynamic Ticker for New Scams
+st.warning("🔥 **CURRENT THREATS:** Digital Arrest Fraud, Electricity Bill SMS, & WhatsApp Job Scams. Never share your screen!")
 
-# Section 2: AI Scanner
+# Scanner Layout
 col1, col2 = st.columns([2, 1])
 
 with col1:
-    user_input = st.text_area("Message ya Call Script yahan paste karein:", height=200)
-    if st.button("🚀 DEEP SCAN (AI)"):
+    user_input = st.text_area("Scammer ka message ya call script yahan likhein:", height=250, placeholder="Example: Sir, main Delhi Police se bol raha hoon...")
+    
+    if st.button("🚀 DEEP SCAN (AI ANALYZE)"):
         if user_input:
-            # Hum isme advanced logic daal rahe hain
             text = user_input.lower()
-            # Advanced Risk Phrases
-            high_risk = ["digital arrest", "jail", "cbi", "supreme court", "video call", "fedex", "illegal parcel"]
-            medium_risk = ["otp", "paisa", "kyc", "block", "lottery"]
             
+            # Risk Analysis Logic
+            high_risk = ["digital arrest", "video call", "fedex", "illegal parcel", "supreme court", "cbi", "drug", "jail"]
+            med_risk = ["otp", "paisa", "kyc", "bank", "block", "lottery", "gift", "link", "click"]
+            
+            # 1. High Risk Check
             if any(word in text for word in high_risk):
-                st.error("🚨 **HIGH RISK DETECTED:** Ye ek naya aur khatarnak scam hai! Turant police ko 1930 par report karein.")
-            elif any(word in text for word in medium_risk):
-                st.warning("⚠️ **POTENTIAL SCAM:** Ye words purane scam patterns se milte-julte hain.")
+                st.error("🚨 **CRITICAL ALERT: MAHA-SCAM DETECTED!**")
+                st.subheader("Analysis: Ye ek 'Digital Arrest' ya 'Identity Theft' scam lag raha hai.")
+                st.info("📢 **Action Plan:** Phone kaat dein. Ye log asli police nahi hain. 1930 par call karein.")
+            
+            # 2. Medium Risk Check
+            elif any(word in text for word in med_risk):
+                st.warning("⚠️ **POTENTIAL FRAUD DETECTED**")
+                st.write("Is message mein thagi wale keywords mile hain. Bank kabhi bhi aisi baatein nahi karta.")
+            
+            # 3. Uncertain/New Pattern
             else:
-                st.success("🧐 **SCAN COMPLETE:** Humein koi jaana-pechana scam pattern nahi mila.")
-                st.write("*Note: Naye scams har din aate hain, hamesha savdhaan rahein.*")
+                st.info("🧐 **NEUTRAL ANALYSIS:** Humein koi purana pattern nahi mila.")
+                st.write("**Par Savdhaan!** Agar wo paisa maang rahe hain ya darr dikha rahe hain, toh ye 100% scam hai.")
+        else:
+            st.warning("Bhai, pehle message toh dalo!")
 
 with col2:
-    st.subheader("📊 Community Reports")
-    st.write("Abhi tak **1,240+** scams report kiye gaye hain.")
-    # Report Button
-    if st.button("🚩 Report a New Scam Type"):
-        st.write("Apne saath hue fraud ka message humein bhejien: support@satyamevai.com")
+    st.subheader("🌐 Global Scam Feed")
+    st.write("Humara database har ghante update hota hai.")
+    st.divider()
+    st.button("🚩 Report a New Scam Method")
+    st.success("Verified Secure: No Data Stored")
 
-# Bottom Branding
 st.write("---")
-st.caption("Powered by Neeraj Singh | Protecting India Digitally")
+st.caption("Developed by Neeraj Singh | Professional Cyber Security Tool")

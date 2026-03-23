@@ -20,20 +20,20 @@ with col1:
         if user_input:
             text = user_input.lower()
             
-            # Risk Analysis Logic
-            high_risk = ["digital arrest", "video call", "fedex", "illegal parcel", "supreme court", "cbi", "drug", "jail"]
-            med_risk = ["otp", "paisa", "kyc", "bank", "block", "lottery", "gift", "link", "click"]
+            # Risk Analysis Logic (Intent Based)
+            high_risk = ["digital arrest", "video call", "fedex", "illegal parcel", "supreme court", "cbi", "drug", "jail", "terrorist"]
+            med_risk = ["otp", "paisa", "kyc", "bank", "block", "lottery", "gift", "link", "click", "electricity"]
             
-            # 1. High Risk Check
+            # 1. High Risk Check (Threats/Fear)
             if any(word in text for word in high_risk):
                 st.error("🚨 **CRITICAL ALERT: MAHA-SCAM DETECTED!**")
-                st.subheader("Analysis: Ye ek 'Digital Arrest' ya 'Identity Theft' scam lag raha hai.")
+                st.subheader("Analysis: Ye 'Fear-Based' (Darr wala) scam lag raha hai.")
                 st.info("📢 **Action Plan:** Phone kaat dein. Ye log asli police nahi hain. 1930 par call karein.")
             
-            # 2. Medium Risk Check
+            # 2. Medium Risk Check (Greed/Banking)
             elif any(word in text for word in med_risk):
                 st.warning("⚠️ **POTENTIAL FRAUD DETECTED**")
-                st.write("Is message mein thagi wale keywords mile hain. Bank kabhi bhi aisi baatein nahi karta.")
+                st.write("Is message mein thagi wale keywords mile hain. Bank kabhi bhi call par details nahi maangta.")
             
             # 3. Uncertain/New Pattern
             else:
@@ -49,5 +49,6 @@ with col2:
     st.button("🚩 Report a New Scam Method")
     st.success("Verified Secure: No Data Stored")
 
+# Reputation Protection Disclaimer
 st.write("---")
-st.caption("Developed by Neeraj Singh | Professional Cyber Security Tool")
+st.caption("🚨 **Disclaimer:** Satyamev AI aapki madad ke liye hai. Kabhi bhi apni personal info kisi anjaan ko na dein. Developing by Neeraj Singh.")

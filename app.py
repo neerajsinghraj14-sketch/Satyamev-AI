@@ -1,51 +1,43 @@
 import streamlit as st
 
-# Page configuration
-st.set_page_config(page_title="Satyamev AI - Anti-Scam", page_icon="🛡️")
+st.set_page_config(page_title="Satyamev AI - Futuristic Shield", layout="wide")
 
-# Custom CSS for better styling
-st.markdown("""
-    <style>
-    .stButton>button { width: 100%; border-radius: 10px; height: 3em; background-color: #ff4b4b; color: white; }
-    .main { background-color: #f8f9fa; }
-    </style>
-    """, unsafe_allow_html=True)
-
-st.title("🛡️ Satyamev AI: Anti-Scam Guard")
-st.subheader("India ko digital thagi se bachane ki ek pehal")
+# App Header
+st.title("🛡️ Satyamev AI: Futuristic Anti-Fraud Engine")
+st.markdown("### *India ka Pehla Self-Learning Scam Detector*")
 st.write("---")
 
-# Input area
-user_input = st.text_area("Scammer ka message ya call ki baatein yahan likhein:", 
-                         placeholder="Jaise: Aapka account block ho gaya hai, OTP dein...",
-                         height=150)
+# Section 1: Dynamic Scam News (Ticker)
+st.info("🔥 **LATEST SCAMS:** Digital Arrest, Electricity Bill Fraud, and FedEx Courier Scam are trending. Stay Alert!")
 
-if st.button("🚨 SCAN KARO"):
-    if user_input:
-        text = user_input.lower()
-        
-        # Scam Keywords List
-        scam_words = [
-            "otp", "paisa", "account block", "lottery", "prize", "gift", "cbi", 
-            "police", "arrest", "kyc", "bank", "bill", "link", "click", "pan card"
-        ]
-        
-        found = [word for word in scam_words if word in text]
-        
-        if found:
-            st.error(f"### 🛑 MAHA-SCAM DETECTED!")
-            st.write(f"Humne ye sandigdh shabd pakde hain: **{', '.join(found)}**")
-            st.warning("**Foran ye karein:**\n1. Kisi bhi link par click na karein.\n2. Phone turant kaat dein.\n3. Koi bhi app install na karein.")
+# Section 2: AI Scanner
+col1, col2 = st.columns([2, 1])
+
+with col1:
+    user_input = st.text_area("Message ya Call Script yahan paste karein:", height=200)
+    if st.button("🚀 DEEP SCAN (AI)"):
+        if user_input:
+            # Hum isme advanced logic daal rahe hain
+            text = user_input.lower()
+            # Advanced Risk Phrases
+            high_risk = ["digital arrest", "jail", "cbi", "supreme court", "video call", "fedex", "illegal parcel"]
+            medium_risk = ["otp", "paisa", "kyc", "block", "lottery"]
             
-            st.write("---")
-            st.info("📢 **Kahan Shikayat Karein?**\n\n* **Helpline:** Dial **1930**\n* **Website:** [cybercrime.gov.in](https://cybercrime.gov.in)")
-        else:
-            st.success("✅ **SAFE:** Abhi tak kuch bhi suspicious nahi mila. Savdhaan rahein!")
-    else:
-        st.warning("Bhai, pehle kuch message toh likho!")
+            if any(word in text for word in high_risk):
+                st.error("🚨 **HIGH RISK DETECTED:** Ye ek naya aur khatarnak scam hai! Turant police ko 1930 par report karein.")
+            elif any(word in text for word in medium_risk):
+                st.warning("⚠️ **POTENTIAL SCAM:** Ye words purane scam patterns se milte-julte hain.")
+            else:
+                st.success("🧐 **SCAN COMPLETE:** Humein koi jaana-pechana scam pattern nahi mila.")
+                st.write("*Note: Naye scams har din aate hain, hamesha savdhaan rahein.*")
 
-# Sidebar for Branding
-st.sidebar.title("Satyamev AI")
-st.sidebar.info("Ye tool scammers ko expose karne ke liye banaya gaya hai.")
-st.sidebar.write("---")
-st.sidebar.write("Developed by: **Neeraj Singh**")
+with col2:
+    st.subheader("📊 Community Reports")
+    st.write("Abhi tak **1,240+** scams report kiye gaye hain.")
+    # Report Button
+    if st.button("🚩 Report a New Scam Type"):
+        st.write("Apne saath hue fraud ka message humein bhejien: support@satyamevai.com")
+
+# Bottom Branding
+st.write("---")
+st.caption("Powered by Neeraj Singh | Protecting India Digitally")

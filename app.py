@@ -21,9 +21,9 @@ if st.button("🚀 DEEP SCAN WITH AI"):
     if user_input:
         with st.spinner('Satyamev AI dimaag laga raha hai...'):
             try:
-                # Naya Generate Method
+                # Model name fixed for google-genai package
                 response = client.models.generate_content(
-                    model="gemini-1.5-flash",
+                    model="gemini-1.5-flash", 
                     contents=f"Analyze this message for a scam. Explain in Hinglish (Hindi + English) if it's a scam and give advice. Message: {user_input}"
                 )
                 
@@ -33,6 +33,7 @@ if st.button("🚀 DEEP SCAN WITH AI"):
                 st.divider()
                 st.info("📢 Help: Dial 1930 for Cyber Crime.")
             except Exception as e:
+                # Agar phir bhi error aaye toh ye details dikhayega
                 st.error(f"Technical Error: {e}")
     else:
         st.warning("Pehle kuch message toh likho!")
